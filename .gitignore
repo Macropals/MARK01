@@ -33,8 +33,9 @@
 
 # Python
 **/__pycache__
-venv
+/venv
 *.log
 **/migrations
 *.egg-info
 *.sqlite3
+.vscode/launch.json
