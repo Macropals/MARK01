@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Python
+**/__pycache__
+venv
+*.log
+**/migrations
+*.egg-info
+*.sqlite3
