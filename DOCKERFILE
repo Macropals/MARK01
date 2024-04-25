@@ -1,5 +1,9 @@
 FROM python:3.9-slim
 
+# These two environment variables prevent __pycache__/ files.
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
 WORKDIR /app
 
 COPY ./src ./src
@@ -7,8 +11,8 @@ COPY ./pyproject.toml ./pyproject.toml
 # hatchling doesn't work with README.md
 COPY ./README.md ./README.md
 
-RUN pip install --upgrade pip
-RUN pip install -e .
+RUN pip install --upgrade pip --no-cache-dir
+RUN pip install -e . --no-cache-dir
 RUN python -m ecology makemigrations
 RUN python -m ecology migrate
 
