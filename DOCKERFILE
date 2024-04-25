@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY ./src ./src
+COPY ./pyproject.toml ./pyproject.toml
+# hatchling doesn't work with README.md
+COPY ./README.md ./README.md
+
+RUN pip install --upgrade pip
+RUN pip install -e .
+RUN python -m ecology makemigrations
+RUN python -m ecology migrate
+
+ENTRYPOINT python3.9 -m ecology runserver 0.0.0.0:8000 --noreload
+EXPOSE 8000
