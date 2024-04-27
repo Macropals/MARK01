@@ -39,4 +39,4 @@
 *.egg-info
 *.sqlite3
 .vscode/launch.json
-.env
+**/.env
