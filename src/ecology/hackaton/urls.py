@@ -1,6 +1,9 @@
 from django.urls import path
 
 from .views import *
+from .apps import HackatonConfig
+
+app_name = HackatonConfig.name
 
 urlpatterns = [
     path("", general.index, name='index'),
