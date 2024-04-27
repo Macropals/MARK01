@@ -15,17 +15,12 @@ jobs:
           - ubuntu-latest
           - windows-latest
         python-version: 
-          - "3.6.x"
           - "3.7.x"
           - "3.8.x"
           - "3.9.x"
           - "3.10.x"
           - "3.11.x"
         exclude:
-          - os: ubuntu-latest
-            python-version: "3.6.x"
-          - os: windows-latest
-            python-version: "3.6.x"
           - os: windows-latest
             python-version: "3.7.x"
           - os: windows-latest
