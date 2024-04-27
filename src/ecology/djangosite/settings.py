@@ -78,7 +78,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = config('LANGUAGE_CODE', default='ru-RU', cast=str)
 
-TIME_ZONE = config('TIME_ZONE', default='UTC+3', cast=str)
+TIME_ZONE = config('TIME_ZONE', default='UTC', cast=str)
 
 USE_I18N = True
 
