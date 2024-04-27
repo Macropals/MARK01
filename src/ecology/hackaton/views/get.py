@@ -46,15 +46,23 @@ def devices(request) -> JsonResponse:
     try:
         json: dict = loads(request.body)
     except JSONDecodeError:
-        fields: list[str] = ['id', 'name']
+        fields: list[str] = ['id', 'floor', 'name', 'x', 'y', 'x_extents', 'y_extents']
     else:
         fields: list[str] = json['fields']
         assert isinstance(fields, list)
         assert all((isinstance(i, str) for i in fields))
-    all_devices = Device.objects.values_list(*fields).all()
+    all_devices = Device.objects.values(*fields).all()
     return JsonResponse({
         'message': 'OK',
-        'devices': list(all_devices)
+        'devices': [{
+            'id': device['id'],
+            'type': device['name'],
+            'floor': device['floor'],
+            'x': device['x'],
+            'y': device['y'],
+            'x_extent': device['x_extents'],
+            'y_extent': device['y_extents']
+        } for device in all_devices ]
     })
 
 def device(request, device_id: int) -> JsonResponse:
