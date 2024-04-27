@@ -5,7 +5,7 @@ from django.test import TestCase, RequestFactory
 from .. import views
 from ..models import Floor, Device, DeviceData
 
-# Create your tests here.
+
 class GetTests(TestCase):
     __slots__ = ('factory', )
 
@@ -50,7 +50,7 @@ class GetTests(TestCase):
         json = loads(response.content)
         self.assertIn('message', json)
         self.assertEqual(json['message'], 'OK', json)
-        self.assertIn('devices', json) 
+        self.assertIn('devices', json)
         self.assertLessEqual(1, len(json['devices']))
         for device in json['devices']:
             self.assertIn('id', device)

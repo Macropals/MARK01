@@ -1,9 +1,9 @@
 from json import loads, JSONDecodeError
 
-from django.shortcuts import render
-from django.http.response import JsonResponse, HttpResponseBadRequest, Http404
+from django.http.response import JsonResponse
 
 from ..models import Device, DeviceData, Floor
+
 
 def latest_device_data(request, device_id: int) -> JsonResponse:
     if request.method != 'GET':
@@ -14,7 +14,7 @@ def latest_device_data(request, device_id: int) -> JsonResponse:
     assert isinstance(device_id, int)
     try:
         device = Device.objects.get(id=device_id)
-    except Device.DoesNotExist as e:
+    except Device.DoesNotExist:
         return JsonResponse({
             'message': 'error',
             'error': f"Device {device_id} does not exist"
@@ -30,12 +30,13 @@ def latest_device_data(request, device_id: int) -> JsonResponse:
             'message': 'error',
             'error': f'Device {device_id} is silent'
         })
-    
+
     return JsonResponse({
         'message': 'OK',
         'date': value.date,
         'data': value.data
     })
+
 
 def devices(request) -> JsonResponse:
     if request.method != 'GET':
@@ -62,8 +63,9 @@ def devices(request) -> JsonResponse:
             'y': device['y'],
             'x_extent': device['x_extents'],
             'y_extent': device['y_extents']
-        } for device in all_devices ]
+        } for device in all_devices]
     })
+
 
 def device(request, device_id: int) -> JsonResponse:
     try:
@@ -84,6 +86,7 @@ def device(request, device_id: int) -> JsonResponse:
             'y_extents': device.y_extents,
         }
     })
+
 
 def floors(request) -> JsonResponse:
     if request.method != 'GET':
@@ -107,8 +110,9 @@ def floors(request) -> JsonResponse:
             'type': floor['name'],
             'center_x': floor['center_x'],
             'center_y': floor['center_y'],
-        } for floor in all_floors ]
+        } for floor in all_floors]
     })
+
 
 def floor(request, floor_id: int) -> JsonResponse:
     try:
