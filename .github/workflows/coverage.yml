@@ -39,13 +39,10 @@ jobs:
               env:
                 SECRET_KEY: 1kjb16jg15kf1j65hb61j1g
               run: python -m coverage run -m ecology test hackaton && coverage html
-            - name: Setup Pages
-              uses: actions/configure-pages@v2
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v1
-              with:
-                  # Upload the coverage directory from the repository
-                  path: './htmlcov'
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
+            - name: Deploy
+              uses: moodiest/push-to-branch-action@develop
+              env:
+                REPO: self
+                BRANCH: gh-pages
+                FOLDER: htmlcov
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
