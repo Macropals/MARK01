@@ -16,12 +16,12 @@ jobs:
           - ubuntu-latest
           - windows-latest
         python-version: 
-          - 3.6.15
-          - 3.7.17
-          - 3.8.18
-          - 3.9.19
-          - 3.10.14
-          - 3.11.9
+          - "3.6.x"
+          - "3.7.x"
+          - "3.8.x"
+          - "3.9.x"
+          - "3.10.x"
+          - "3.11.x"
 
     runs-on: ${{ matrix.os }}
     steps:
