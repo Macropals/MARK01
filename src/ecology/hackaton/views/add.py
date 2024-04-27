@@ -3,13 +3,6 @@ from json import loads, JSONDecodeError
 from django.shortcuts import render
 from django.http.response import JsonResponse, HttpResponseBadRequest, Http404
 
-__all__ = (
-    'device_data',
-    'floor',
-    'device',
-    'floor_rectangle'
-)
-
 def device_data(request):
     if request.method == 'PUT':
         try:
@@ -18,7 +11,7 @@ def device_data(request):
             return JsonResponse({"message": "error", "error": e.args})
     else:
         return HttpResponseBadRequest("This URL required PUT HTTP method")
-    return JsonResponse({"message": 'OK'})
+    return JsonResponse({"message": 'NotImplemented'})
 
 def floor(request):
     raise Http404('Not implemented')

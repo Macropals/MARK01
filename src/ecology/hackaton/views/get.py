@@ -5,18 +5,12 @@ from django.http.response import JsonResponse, HttpResponseBadRequest, Http404
 
 from ..models import Device, DeviceData
 
-__all__ = (
-    'latest_device',
-)
-
-def latest_device(request):
+def latest_device_data(request, device_id: int) -> JsonResponse:
     if request.method != 'GET':
         return JsonResponse({
             'message': 'error',
             'exception': f'Awaited HTTP method GET, got {request.method}'
         })
-    json: dict = loads(request.body)
-    device_id: int = json['id']
     assert isinstance(device_id, int)
     try:
         device = Device.objects.get(id=device_id)
@@ -25,7 +19,7 @@ def latest_device(request):
             'message': 'error',
             'error': f"Device {device_id} does not exist"
         })
-    value: Device | None = (
+    value: DeviceData | None = (
         DeviceData.objects
         .filter(device=device)
         .order_by('-date')
@@ -39,10 +33,11 @@ def latest_device(request):
     
     return JsonResponse({
         'message': 'OK',
+        'date': value.date,
         'data': value.data
     })
 
-def devices(request):
+def devices(request) -> JsonResponse:
     if request.method != 'GET':
         return JsonResponse({
             'message': 'error',
@@ -61,3 +56,24 @@ def devices(request):
         'message': 'OK',
         'devices': list(all_devices)
     })
+
+def device(request, device_id: int) -> JsonResponse:
+    try:
+        device = Device.objects.get(pk=device_id)
+    except Device.DoesNotExist:
+        return JsonResponse({
+            'message': 'error',
+            'error': f'Device {device_id} does not exist'
+        })
+    return JsonResponse({
+        'message': 'OK',
+        'device': {
+            'floor': device.floor.index,
+            'name': device.name if device.name is not None else '',
+            'x': device.x,
+            'y': device.y,
+            'x_extents': device.x_extents,
+            'y_extents': device.y_extents,
+        }
+    })
+
