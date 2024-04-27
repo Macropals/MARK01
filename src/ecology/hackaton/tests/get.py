@@ -69,9 +69,10 @@ class GetTests(TestCase):
             self.assertIsInstance(device['y_extent'], (float, int))
 
     def testGetDeviceInt(self) -> None:
-        response = self.factory.get('/get/device/1')
+        request = self.factory.get('/get/device/1')
+        response = views.get.device(request, device_id=1)
         self.assertEqual(200, response.status_code)
-        json = response.json()
+        json = loads(response.content)
         self.assertIn('message', json)
         self.assertEqual(json['message'], 'OK', json)
         self.assertIn('device', json)
