@@ -3,7 +3,7 @@ from json import loads, JSONDecodeError
 from django.shortcuts import render
 from django.http.response import JsonResponse, HttpResponseBadRequest, Http404
 
-from ..models import Device, DeviceData
+from ..models import Device, DeviceData, Floor
 
 def latest_device_data(request, device_id: int) -> JsonResponse:
     if request.method != 'GET':
@@ -85,3 +85,44 @@ def device(request, device_id: int) -> JsonResponse:
         }
     })
 
+def floors(request) -> JsonResponse:
+    if request.method != 'GET':
+        return JsonResponse({
+            'message': 'error',
+            'exception': f'Awaited HTTP method GET, got {request.method}'
+        })
+    try:
+        json: dict = loads(request.body)
+    except JSONDecodeError:
+        fields: list[str] = ['index', 'name', 'center_x', 'center_y']
+    else:
+        fields: list[str] = json['fields']
+        assert isinstance(fields, list)
+        assert all((isinstance(i, str) for i in fields))
+    all_floors = Floor.objects.values(*fields).all()
+    return JsonResponse({
+        'message': 'OK',
+        'floors': [{
+            'index': floor['index'],
+            'type': floor['name'],
+            'center_x': floor['center_x'],
+            'center_y': floor['center_y'],
+        } for floor in all_floors ]
+    })
+
+def floor(request, floor_id: int) -> JsonResponse:
+    try:
+        floor = Floor.objects.get(pk=floor_id)
+    except Floor.DoesNotExist:
+        return JsonResponse({
+            'message': 'error',
+            'error': f'Floor {floor_id} does not exist'
+        })
+    return JsonResponse({
+        'message': 'OK',
+        'floor': {
+            'type': floor.name,
+            'center_x': floor.center_x,
+            'center_y': floor.center_y
+        }
+    })

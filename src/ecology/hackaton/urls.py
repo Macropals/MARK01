@@ -10,5 +10,7 @@ urlpatterns = [
     path('add/floor-rectangle', add.floor_rectangle, name='add_floor_rectangle'),
     path('get/device', get.devices),
     path('get/device/<int:device_id>', get.device),
-    path('get/device-data/<int:device_id>/latest', get.latest_device_data)
+    path('get/device-data/<int:device_id>/latest', get.latest_device_data),
+    path('get/floor', get.floors),
+    path('get/floor/<int:floor_id>', get.floor)
 ]
