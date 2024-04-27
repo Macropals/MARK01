@@ -25,7 +25,12 @@ def latest_device(request):
             'message': 'error',
             'error': f"Device {device_id} does not exist"
         })
-    value: Device | None = device.objects.order_by('-date').first()
+    value: Device | None = (
+        DeviceData.objects
+        .filter(device=device)
+        .order_by('-date')
+        .first()
+    )
     if value is None:
         return JsonResponse({
             'message': 'error',
@@ -36,3 +41,16 @@ def latest_device(request):
         'message': 'OK',
         'data': value.data
     })
+
+def devices(request):
+    if request.method != 'GET':
+        return JsonResponse({
+            'message': 'error',
+            'exception': f'Awaited HTTP method GET, got {request.method}'
+        })
+    json: dict = loads(request.body)
+    fields: list[str] = json['fields']
+    assert isinstance(fields, list)
+    assert all((isinstance(i, str) for i in fields))
+    all_devices = Device.objects.values_list(*fields).all()
+    print(all_devices)
