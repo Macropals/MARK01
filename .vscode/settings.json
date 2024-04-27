@@ -1,5 +1,10 @@
 {
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/venv": true
+    },
     "cSpell.words": [
         "noreload"
-    ]
+    ],
+    "autoDocstring.docstringFormat": "sphinx",
 }
