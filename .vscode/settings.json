@@ -4,6 +4,7 @@
         "**/venv": true
     },
     "cSpell.words": [
+        "hackaton",
         "noreload"
     ],
     "autoDocstring.docstringFormat": "sphinx",
