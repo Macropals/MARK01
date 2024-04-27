@@ -19,13 +19,13 @@ authors = [
 description = "Site that takes information from USB device, updates DB and shows information on site"
 readme = {file = "README.md", content-type = "text/markdown"}
 dependencies = [
-  "asgiref == 3.8.1"
-  , "django == 4.2.11"
-  , "sqlparse == 0.5.0"
-  , "typing-extensions == 4.11.0"
-  , "tzdata == 2024.1"
-  , "pyUSB == 1.2.1"
-  , "python-decouple == 3.8"
+  "asgiref" # py3.9 3.8.1
+  , "django" # py3.9 4.2.11
+  , "sqlparse" # py3.9 0.5.0
+  , "typing-extensions" # py3.9 4.11.0
+  , "tzdata" # py3.9 2024.1
+  , "pyUSB" # py3.9 1.2.1
+  , "python-decouple" # py3.9 3.8 
 ]
 classifiers = [
   "Development Status :: 1 - Planning"
