@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{% block title %}Ecology{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static "Hackaton/css/main.css" %}" />
+		{% block stylesheets %}
+		{% endblock %}
+	</head>
+	<body class="is-preload">
+    {% block main %}
+    {% endblock main %}
+    <script src="{% static "hackaton/js/jquery.min.js" %}"></script>
+    <script src="{% static "hackaton/js/browser.min.js" %}"></script>
+    <script src="{% static "hackaton/js/breakpoints.min.js" %}"></script>
+    <script src="{% static "hackaton/js/util.js" %}"></script>
+    <script src="{% static "hackaton/js/main.js" %}"></script>
+    {% block scripts %}
+    {% endblock %}
+	</body>
