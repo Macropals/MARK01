@@ -11,32 +11,33 @@ packages = [
 name="ecology"
 version="0.1"
 authors = [
-  {name="Геворкян Артём", email="tima-1324@mail.ru"},
-  {name="Черных Александр"},
-  {name="Апостолов Антон"},
-  {name="Новожилов Артём"},
+  {name="Геворкян Артём", email="tima-1324@mail.ru"}
+  , {name="Черных Александр"}
+  , {name="Апостолов Антон"}
+  , {name="Новожилов Артём"}
 ]
 description = "Site that takes information from USB device, updates DB and shows information on site"
 readme = {file = "README.md", content-type = "text/markdown"}
 dependencies = [
-  "asgiref == 3.8.1",
-  "django == 4.2.11",
-  "sqlparse == 0.5.0",
-  "typing-extensions == 4.11.0",
-  "tzdata == 2024.1",
-  "pyUSB == 1.2.1"
+  "asgiref == 3.8.1"
+  , "django == 4.2.11"
+  , "sqlparse == 0.5.0"
+  , "typing-extensions == 4.11.0"
+  , "tzdata == 2024.1"
+  , "pyUSB == 1.2.1"
+  , "python-decouple == 3.8"
 ]
 classifiers = [
-  "Development Status :: 1 - Planning",
-  "Programming Language :: C",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
-  "Framework :: Django :: 4.2",
-  "Intended Audience :: Science/Research",
-  "Natural Language :: Russian",
-  "Operating System :: Microsoft :: Windows",
-  "Operating System :: Microsoft :: Windows :: Windows 11",
+  "Development Status :: 1 - Planning"
+  , "Programming Language :: C"
+  , "Programming Language :: Python"
+  , "Programming Language :: Python :: 3"
+  , "Programming Language :: Python :: 3.9"
+  , "Framework :: Django :: 4.2"
+  , "Intended Audience :: Science/Research"
+  , "Natural Language :: Russian"
+  , "Operating System :: Microsoft :: Windows"
+  , "Operating System :: Microsoft :: Windows :: Windows 11"
 ]
 requires-python = ">= 3.9"
 

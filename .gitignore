@@ -39,3 +39,4 @@
 *.egg-info
 *.sqlite3
 .vscode/launch.json
+src/ecology/.env
