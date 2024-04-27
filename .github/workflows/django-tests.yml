@@ -1,4 +1,4 @@
-name: Django tests
+name: Tests windows/linux 3.8-3.9
 
 on:
   push:
@@ -8,12 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9]
+        os: [ubuntu-latest, windows-latest]
+        python-version: [3.8, 3.9]
 
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
