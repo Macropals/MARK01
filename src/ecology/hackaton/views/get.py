@@ -48,9 +48,16 @@ def devices(request):
             'message': 'error',
             'exception': f'Awaited HTTP method GET, got {request.method}'
         })
-    json: dict = loads(request.body)
-    fields: list[str] = json['fields']
-    assert isinstance(fields, list)
-    assert all((isinstance(i, str) for i in fields))
+    try:
+        json: dict = loads(request.body)
+    except JSONDecodeError:
+        fields: list[str] = ['id', 'name']
+    else:
+        fields: list[str] = json['fields']
+        assert isinstance(fields, list)
+        assert all((isinstance(i, str) for i in fields))
     all_devices = Device.objects.values_list(*fields).all()
-    print(all_devices)
+    return JsonResponse({
+        'message': 'OK',
+        'devices': list(all_devices)
+    })
