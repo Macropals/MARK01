@@ -97,7 +97,7 @@ def floors(request) -> JsonResponse:
     try:
         json: dict = loads(request.body)
     except JSONDecodeError:
-        fields: list[str] = ['index', 'name', 'center_x', 'center_y']
+        fields: list[str] = ['index', 'name', 'center_x', 'center_y','x_extents',' y_extents']
     else:
         fields: list[str] = json['fields']
         assert isinstance(fields, list)
@@ -110,6 +110,8 @@ def floors(request) -> JsonResponse:
             'type': floor['name'],
             'center_x': floor['center_x'],
             'center_y': floor['center_y'],
+            'x_extents': floor['x_extents'],
+            'y_extents': floor['y_extents'],
         } for floor in all_floors]
     })
 
@@ -127,6 +129,8 @@ def floor(request, floor_id: int) -> JsonResponse:
         'floor': {
             'type': floor.name,
             'center_x': floor.center_x,
-            'center_y': floor.center_y
+            'center_y': floor.center_y,
+            'x_extents': floor.x_extents,
+            'y_extents': floor.y_extents,
         }
     })

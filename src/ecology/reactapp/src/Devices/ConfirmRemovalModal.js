@@ -10,12 +10,11 @@ const ConfirmRemovalModal = (props) => {
 
   const toggle = () => {
     setModal(!modal)
-    console.log(modal)
     return 1
   };
 
-  const deleteDevice = (id) => {
-    axios.delete(API_URL + + id).then(() => {
+  const deleteEntity = (id,entity) => {
+    axios.delete(API_URL +"/del/"+{entity}+"/"+id).then(() => {
       props.resetState()
       toggle()
     });
@@ -38,7 +37,7 @@ const ConfirmRemovalModal = (props) => {
           <Button
             type="button"
             color="primary"
-            onClick={() => deleteDevice(props.id)}
+            onClick={() => deleteEntity(props.id,props.entity)}
           >
             Yes
           </Button>

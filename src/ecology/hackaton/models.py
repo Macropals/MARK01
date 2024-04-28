@@ -6,6 +6,8 @@ class Floor(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     center_x = models.FloatField(blank=True, null=False, default=0)
     center_y = models.FloatField(blank=True, null=False, default=0)
+    x_extents = models.FloatField(blank=True, null=False, default=0)
+    y_extents = models.FloatField(blank=True, null=False, default=0)
 
     def __repr__(self) -> str:
         return f"<{self.index}. {self.name}>"
