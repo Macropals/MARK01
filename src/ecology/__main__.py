@@ -25,7 +25,6 @@ def main():
         execute_from_command_line(sys.argv)
     finally:
         p.terminate()
-        raise
 
 
 if __name__ == "__main__":
