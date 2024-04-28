@@ -1,13 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Component, Fragment } from "react";
+import React, { Container, Fragment } from "react";
 import Devices from "./Devices/Devices";
 import Header from './Header';
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
+  Link
 } from 'react-router-dom';
+import { Navbar,Nav } from 'react-bootstrap';
 
 import './App.css';
 import Main from './Main/Main';
@@ -16,23 +18,22 @@ function App() {
   return (
     <Router>
       <Fragment>
-        <Header />
-        <ul>
-          <li>
-            <Link to="/">Главная</Link>
-          </li>
-          <li>
-            <Link to="/device">Устройства</Link>
-          </li>
-          <li>
-            <Link to="/map">План здания</Link>
-          </li>
-        </ul>
+        <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/device">Devices</Nav.Link>
+                <Nav.Link href="/map">Map</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+        </Navbar>
         <Fragment>
           <Routes>
-            <Route path="/" element={<Main />}/>
-            <Route path="/device" element={<Devices />}/>
-            <Route path="/map"element={<Map />}/> 
+            <Route path="/" element={<Main />} />
+            <Route path="/device" element={<Devices />} />
+            <Route path="/map" element={<Map />} />
           </Routes>
         </Fragment>
       </Fragment>
