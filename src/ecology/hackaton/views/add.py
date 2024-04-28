@@ -1,8 +1,8 @@
 from json import loads, JSONDecodeError
 
-from django.http.response import Http404, JsonResponse, HttpResponseBadRequest
+from django.http.response import JsonResponse, HttpResponseBadRequest
 
-from ..models import Device, Floor, DeviceData
+from ..models import Floor, DeviceData, Device, FloorRectangle
 
 def device_data(request):
     if request.method == 'PUT':
@@ -49,7 +49,7 @@ def device(request):
     else:
         return HttpResponseBadRequest("This URL required PUT HTTP method")
     try:
-        data = Floor(**data)
+        data = Device(**data)
     except Exception as e:
         return JsonResponse({
             "message": 'error',
@@ -67,7 +67,7 @@ def floor_rectangle(request):
     else:
         return HttpResponseBadRequest("This URL required PUT HTTP method")
     try:
-        data = Floor(**data)
+        data = FloorRectangle(**data)
     except Exception as e:
         return JsonResponse({
             "message": 'error',
