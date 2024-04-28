@@ -4,8 +4,8 @@ from django.db import models
 class Floor(models.Model):
     index = models.IntegerField(primary_key=True, null=False)
     name = models.CharField(max_length=50, blank=True, null=True)
-    center_x = models.FloatField(blank=True, null=False, default=0)
-    center_y = models.FloatField(blank=True, null=False, default=0)
+    x_extents = models.FloatField(blank=True, null=True, default=2)
+    y_extents = models.FloatField(blank=True, null=True, default=2)
 
     def __repr__(self) -> str:
         return f"<{self.index}. {self.name}>"
