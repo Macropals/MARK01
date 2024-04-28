@@ -4,6 +4,7 @@ from django.http.response import JsonResponse, HttpResponseBadRequest
 
 from ..models import Floor, DeviceData, Device, FloorRectangle
 
+
 def device_data(request):
     if request.method == 'PUT':
         try:

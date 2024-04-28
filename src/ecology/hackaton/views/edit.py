@@ -2,7 +2,8 @@ from json import loads, JSONDecodeError
 
 from django.http.response import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
 
-from ..models import Floor, DeviceData, Device, FloorRectangle
+from ..models import Floor, Device, FloorRectangle
+
 
 def device_data(request):
     return HttpResponseForbidden("Device data un-editable")
@@ -20,7 +21,7 @@ def floor(request):
     pk = data.pop('index')
     try:
         floor = Floor.objects.get(pk=pk)
-    except Floor.DoesNotExist as e:
+    except Floor.DoesNotExist:
         return JsonResponse({
             "message": 'error',
             "error": "Floor with index {pk} does not exist"
@@ -59,6 +60,7 @@ def device(request):
             "error": e.args[0]
         })
     return JsonResponse({"message": 'OK'})
+
 
 def floor_rectangle(request):
     if request.method == 'PATCH':
