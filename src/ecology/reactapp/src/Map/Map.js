@@ -13,7 +13,7 @@ const Map = (props) => {
 
 
     const getFloors = () => {
-        axios.get(API_URL + '/get/floors').then(res => setFloors({ floors: res.data.floors }));
+        axios.get(API_URL + '/get/floor').then(res => setFloors({ floors: res.data.floors }));
     };
 
     const resetState = () => {

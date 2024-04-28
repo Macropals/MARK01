@@ -97,7 +97,7 @@ def floors(request) -> JsonResponse:
     try:
         json: dict = loads(request.body)
     except JSONDecodeError:
-        fields: list[str] = ['index', 'name', 'center_x', 'center_y','x_extents',' y_extents']
+        fields: list[str] = ['index', 'name', 'center_x', 'center_y','x_extents','y_extents']
     else:
         fields: list[str] = json['fields']
         assert isinstance(fields, list)

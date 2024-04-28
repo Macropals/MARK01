@@ -34,13 +34,14 @@ def floor(request):
         return HttpResponseBadRequest("This URL required PUT HTTP method")
     try:
         data = Floor(**data)
+        data.save()
+        return JsonResponse({"message": 'Ok'})
     except Exception as e:
         return JsonResponse({
             "message": 'error',
             "error": e.args[0]
         })
-    data.save()
-    return JsonResponse({"message": 'NotImplemented'})
+    
 
 
 def device(request):
@@ -53,17 +54,17 @@ def device(request):
         return HttpResponseBadRequest("This URL required PUT HTTP method")
     pk_floor = data['floor']
     data['floor'] = Floor.objects.get(pk=pk_floor)
-    if data['floor']:
+    if not data['floor']:
         return JsonResponse({"message": "error", "error": f"Floor {pk_floor} does not exist"})
     try:
         data = Device(**data)
+        data.save()
+        return JsonResponse({"message": 'Ok'})
     except Exception as e:
         return JsonResponse({
             "message": 'error',
             "error": e.args[0]
         })
-    data.save()
-    return JsonResponse({"message": 'NotImplemented'})
 
 
 def floor_rectangle(request):

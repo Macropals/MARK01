@@ -17,8 +17,6 @@ class DevicesList extends Component {
             <th>Floor</th>
             <th>X</th>
             <th>Y</th>
-            <th>Xextent</th>
-            <th>Yextent</th>
             <th>Value</th>
           </tr>
         </thead>
