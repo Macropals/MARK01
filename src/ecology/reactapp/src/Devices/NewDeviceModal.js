@@ -11,7 +11,7 @@ const NewDeviceModal = (props) => {
   return (
     <Fragment>
       <Button color="danger" onClick={toggle}>
-        Add
+        {props.create? "Add": "Edit"}
       </Button>
 
       <Modal show={modal} toggle={toggle}>
@@ -19,6 +19,7 @@ const NewDeviceModal = (props) => {
 
         <ModalBody>
           <NewDeviceForm
+            create={props.create}
             resetState={props.resetState}
             toggle={toggle}
             device={props.device}
