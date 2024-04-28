@@ -107,7 +107,7 @@ def floors(request) -> JsonResponse:
         'message': 'OK',
         'floors': [{
             'index': floor['index'],
-            'type': floor['name'],
+            'name': floor['name'],
             'center_x': floor['center_x'],
             'center_y': floor['center_y'],
             'x_extents': floor['x_extents'],
@@ -127,7 +127,7 @@ def floor(request, floor_id: int) -> JsonResponse:
     return JsonResponse({
         'message': 'OK',
         'floor': {
-            'type': floor.name,
+            'name': floor.name,
             'center_x': floor.center_x,
             'center_y': floor.center_y,
             'x_extents': floor.x_extents,
