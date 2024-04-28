@@ -4,7 +4,6 @@ import os
 import sys
 from pathlib import Path
 from multiprocessing import Process
-from time import sleep
 
 
 def main():
