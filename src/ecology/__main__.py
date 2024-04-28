@@ -3,6 +3,8 @@
 import os
 import sys
 from pathlib import Path
+from multiprocessing import Process
+from time import sleep
 
 
 def main():
@@ -17,7 +19,15 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    execute_from_command_line(sys.argv)
+    from .react import start_react
+    p = Process(target=start_react, name='ReactApp')
+    p.start()
+    sleep(2)
+    try:
+        execute_from_command_line(sys.argv)
+    except:
+        p.terminate()
+        raise
 
 
 if __name__ == "__main__":
