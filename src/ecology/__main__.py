@@ -22,7 +22,6 @@ def main():
     from .react import start_react
     p = Process(target=start_react, name='ReactApp')
     p.start()
-    sleep(2)
     try:
         execute_from_command_line(sys.argv)
     except:
