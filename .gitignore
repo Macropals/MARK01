@@ -40,3 +40,6 @@
 *.sqlite3
 .vscode/launch.json
 **/.env
+
+# MS Office
+~$*
