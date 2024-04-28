@@ -36,7 +36,7 @@ const NewDeviceForm = (props) => {
   const createDevice = (e) => {
     e.preventDefault();
     const deviceData = { id, name, floor, x, y };
-    axios.post(API_URL, deviceData).then(() => {
+    axios.put(API_URL+"/add/device", deviceData).then(() => {
       props.resetState();
       props.toggle();
     });
@@ -45,7 +45,7 @@ const NewDeviceForm = (props) => {
   const editDevice = (e) => {
     e.preventDefault();
     const deviceData = { id, name, floor, x, y };
-    axios.put(API_URL+"/get/defice/" + id, deviceData).then(() => {
+    axios.put(API_URL+"/edit/device/" + id, deviceData).then(() => {
       props.resetState();
       props.toggle();
     });

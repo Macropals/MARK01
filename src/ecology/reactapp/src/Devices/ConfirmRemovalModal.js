@@ -15,7 +15,7 @@ const ConfirmRemovalModal = (props) => {
   };
 
   const deleteDevice = (id) => {
-    axios.delete(API_URL+ + id).then(() => {
+    axios.delete(API_URL + + id).then(() => {
       props.resetState()
       toggle()
     });
@@ -26,7 +26,7 @@ const ConfirmRemovalModal = (props) => {
       <Button color="danger" onClick={toggle}>
         Remove
       </Button>
-      <Modal style={{opacity:1}} show={modal} toggle={toggle}>
+      <Modal style={{ opacity: 1 }} show={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>
           Do you really want to delete this device?
         </ModalHeader>
