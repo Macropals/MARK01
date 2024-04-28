@@ -19,6 +19,7 @@ def device_data(request):
             "message": 'error',
             "error": e.args[0]
         })
+    data.save()
     return JsonResponse({"message": 'NotImplemented'})
 
 
@@ -37,6 +38,7 @@ def floor(request):
             "message": 'error',
             "error": e.args[0]
         })
+    data.save()
     return JsonResponse({"message": 'NotImplemented'})
 
 
@@ -59,6 +61,7 @@ def device(request):
             "message": 'error',
             "error": e.args[0]
         })
+    data.save()
     return JsonResponse({"message": 'NotImplemented'})
 
 
@@ -77,4 +80,5 @@ def floor_rectangle(request):
             "message": 'error',
             "error": e.args[0]
         })
+    data.save()
     return JsonResponse({"message": 'NotImplemented'})
