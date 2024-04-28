@@ -1,9 +1,16 @@
 from pathlib import Path
 from time import sleep
-from subprocess import run
+from subprocess import run, DEVNULL
 
 
 def start_react():
     path = Path(__file__).parent / 'reactapp'
     print(str(path))
-    run(['npm', 'start'], cwd=path, shell=True)
+    run(
+        ['npm', 'start'],
+        stdin=DEVNULL,
+        stderr=DEVNULL,
+        stdout=DEVNULL,
+        cwd=path,
+        shell=True
+    )
