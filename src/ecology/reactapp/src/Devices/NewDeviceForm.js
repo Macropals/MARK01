@@ -1,104 +1,110 @@
-import React from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-
-import axios from "axios";
-
-
+import React, { useState } from 'react';
+import { Button,Form } from 'react-bootstrap'; // Assuming you're using Reactstrap for Form components
+import axios from 'axios';
 import { API_URL } from '../constants';
 
-class NewDeviceForm extends React.Component {
-  state = {
-    id: 0,
-    type: "",
-    floor: 0,
-    x: 0,
-    y: 0
-  };
+const NewDeviceForm = (props) => {
+  const [id, setId] = useState('SD110');
+  const [type, setType] = useState('Air sensor');
+  const [floor, setFloor] = useState(1);
+  const [x, setX] = useState(1.1);
+  const [y, setY] = useState(1.2);
 
-  componentDidMount() {
-    if (this.props.device) {
-      const { id, type, floor, x,y } = this.props.student;
-      this.setState({ id, type, floor, x,y });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'id':
+        setId(value);
+        break;
+      case 'type':
+        setType(value);
+        break;
+      case 'floor':
+        setFloor(value);
+        break;
+      case 'x':
+        setX(value);
+        break;
+      case 'y':
+        setY(value);
+        break;
+      default:
+        break;
     }
-  }
-
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
   };
 
-  createStudent = e => {
+  const createDevice = (e) => {
     e.preventDefault();
-    axios.post(API_URL, this.state).then(() => {
-      this.props.resetState();
-      this.props.toggle();
+    const deviceData = { id, type, floor, x, y };
+    axios.post(API_URL, deviceData).then(() => {
+      props.resetState();
+      props.toggle();
     });
   };
 
-  editStudent = e => {
+  const editDevice = (e) => {
     e.preventDefault();
-    axios.put(API_URL + this.state.id, this.state).then(() => {
-      this.props.resetState();
-      this.props.toggle();
+    const deviceData = { id, type, floor, x, y };
+    axios.put(API_URL+"/get/defice/" + id, deviceData).then(() => {
+      props.resetState();
+      props.toggle();
     });
   };
 
-  defaultIfEmpty = value => {
-    return value === "" ? "" : value;
+  const defaultIfEmpty = (value) => {
+    return value === '' ? '' : value;
   };
 
-  render() {
-    return (
-      <Form onSubmit={this.props.device ? this.editDevice : this.createDevice}>
-        <FormGroup>
-          <Label for="id">ID:</Label>
-          <Input
-            type="text"
-            name="id"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.id)}
-          />
-          
-        </FormGroup>
-        <FormGroup>
-          <Label for="type">Type:</Label>
-          <Input
-            type="text"
-            name="type"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.type)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="floor">Floor:</Label>
-          <Input
-            type="text"
-            name="text"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.floor)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="X">X:</Label>
-          <Input
-            type="number"
-            name="X"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.x)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="Y">Y:</Label>
-          <Input
-            type="number"
-            name="Y"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.y)}
-          />
-        </FormGroup>
-        <Button>Add</Button>
-      </Form>
-    );
-  }
-}
+  return (
+    <Form onSubmit={props.device ? editDevice : createDevice}>
+      <Form.Group>
+        <Form.Label for="id">ID:</Form.Label>
+        <Form.Control
+          type="text"
+          name="id"
+          onChange={onChange}
+          value={defaultIfEmpty(id)}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label for="type">Type:</Form.Label>
+        <Form.Control
+          type="text"
+          name="type"
+          onChange={onChange}
+          value={defaultIfEmpty(type)}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label for="floor">Floor:</Form.Label>
+        <Form.Control
+          type="text"
+          name="floor"
+          onChange={onChange}
+          value={defaultIfEmpty(floor)}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label for="x">X:</Form.Label>
+        <Form.Control
+          type="number"
+          name="x"
+          onChange={onChange}
+          value={defaultIfEmpty(x)}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label for="y">Y:</Form.Label>
+        <Form.Control
+          type="number"
+          name="y"
+          onChange={onChange}
+          value={defaultIfEmpty(y)}
+        />
+      </Form.Group>
+      <Button onClick={props.device ? editDevice : createDevice}>Add</Button>
+    </Form>
+  );
+};
 
 export default NewDeviceForm;

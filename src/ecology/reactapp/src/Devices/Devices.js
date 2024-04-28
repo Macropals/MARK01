@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import DevicesList from "./DevicesList";
 
 import NewDeviceModal from "./NewDeviceModal";
@@ -18,8 +18,9 @@ class Devices extends Component {
   }
 
   getDevices = () => {
-    axios.get(API_URL).then(res => this.setState({ devices: res.data }));
+    axios.get(API_URL + '/get/device').then(res => this.setState({ devices: res.data.devices }));
   };
+
 
   resetState = () => {
     this.getDevices();

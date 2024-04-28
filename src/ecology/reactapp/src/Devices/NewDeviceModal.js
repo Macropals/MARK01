@@ -1,55 +1,32 @@
-import React, { Component, Fragment } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import React, { useState, Fragment } from "react";
+import { Button, Modal, ModalHeader, ModalBody } from "react-bootstrap";
 import NewDeviceForm from "./NewDeviceForm";
 
-class NewDeviceModal extends Component {
-  state = {
-    modal: false
+const NewDeviceModal = (props) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => {
+    setModal(!modal);
   };
 
-  toggle = () => {
-    this.setState(previous => ({
-      modal: !previous.modal
-    }));
-  };
+  return (
+    <Fragment>
+      <Button color="danger" onClick={toggle}>
+        Add
+      </Button>
 
-  render() {
-    const create = this.props.create;
+      <Modal show={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>{props.title}</ModalHeader>
 
-    var title = "Editing device";
-    var button = <Button onClick={this.toggle}>Edit</Button>;
-    if (create) {
-      title = "Creating New device";
-
-      button = (
-        <Button
-          color="primary"
-          className="float-right"
-          onClick={this.toggle}
-          style={{ minWidth: "200px" }}
-        >
-          Create New
-        </Button>
-      );
-    }
-
-    return (
-      <Fragment>
-        {button}
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
-
-          <ModalBody>
-            <NewDeviceForm
-              resetState={this.props.resetState}
-              toggle={this.toggle}
-              device={this.props.device}
-            />
-          </ModalBody>
-        </Modal>
-      </Fragment>
-    );
-  }
-}
+        <ModalBody>
+          <NewDeviceForm
+            resetState={props.resetState}
+            toggle={toggle}
+            device={props.device}
+          />
+        </ModalBody>
+      </Modal>
+    </Fragment>
+  );
+};
 
 export default NewDeviceModal;

@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { Table } from "reactstrap";
+import { Table } from "react-bootstrap";
 import NewDeviceModal from "./NewDeviceModal";
 
 import ConfirmRemovalModal from "./ConfirmRemovalModal";
@@ -17,6 +17,8 @@ class DevicesList extends Component {
             <th>Floor</th>
             <th>X</th>
             <th>Y</th>
+            <th>Xextent</th>
+            <th>Yextent</th>
             <th>Value</th>
           </tr>
         </thead>
@@ -30,10 +32,12 @@ class DevicesList extends Component {
           ) : (
             devices.map(device => (
               <tr key={device.id}>
-                <td>{devices.type}</td>
-                <td>{devices.floor}</td>
-                <td>{devices.x}</td>
-                <td>{devices.y}</td>
+                <td>{device.type}</td>
+                <td>{device.floor}</td>
+                <td>{device.x}</td>
+                <td>{device.y}</td>
+                <td>{device.x_extent}</td>
+                <td>{device.y_extent}</td>
                 <td align="center">
                   <NewDeviceModal
                     create={false}

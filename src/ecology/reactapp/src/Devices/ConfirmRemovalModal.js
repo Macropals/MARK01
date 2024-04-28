@@ -1,55 +1,51 @@
-import React, { Component, Fragment } from "react";
-import { Modal, ModalHeader, Button, ModalFooter } from "reactstrap";
-
+import React, { useState, Fragment } from "react";
+import { Modal, ModalHeader, Button, ModalFooter } from "react-bootstrap";
 import axios from "axios";
-
 import { API_URL } from "../constants";
 
-class ConfirmRemovalModal extends Component {
-  state = {
-    modal: false
+
+
+const ConfirmRemovalModal = (props) => {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => {
+    setModal(!modal)
+    console.log(modal)
+    return 1
   };
 
-  toggle = () => {
-    this.setState(previous => ({
-      modal: !previous.modal
-    }));
-  };
-
-  deleteDevice = id => {
+  const deleteDevice = (id) => {
     axios.delete(API_URL + id).then(() => {
-      this.props.resetState();
-      this.toggle();
+      props.resetState()
+      toggle()
     });
   };
 
-  render() {
-    return (
-      <Fragment>
-        <Button color="danger" onClick={() => this.toggle()}>
-          Remove
-        </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>
-            Do you really wanna delete this device?
-          </ModalHeader>
+  return (
+    <Fragment>
+      <Button color="danger" onClick={toggle}>
+        Remove
+      </Button>
+      <Modal style={{opacity:1}} show={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>
+          Do you really want to delete this device?
+        </ModalHeader>
 
-          <ModalFooter>
-            <Button type="button" onClick={() => this.toggle()}>
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              color="primary"
-              onClick={() => this.deleteStudent(this.props.id)}
-            >
-              Yes
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </Fragment>
-    );
-  }
-}
+        <ModalFooter>
+          <button type="button" onClick={toggle}>
+            Cancel
+          </button>
+          <Button
+            type="button"
+            color="primary"
+            onClick={() => deleteDevice(props.id)}
+          >
+            Yes
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </Fragment>
+  );
+};
 
 export default ConfirmRemovalModal;
